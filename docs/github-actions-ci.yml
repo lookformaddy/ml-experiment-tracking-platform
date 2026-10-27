@@ -1,0 +1,14 @@
+# CI definition shipped as a doc because the GitHub App integration used for
+# pushing rejects files under .github/workflows/ (missing Workflows permission).
+# To activate: move this file to .github/workflows/ci.yml in the repo.
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install pytest
+      - run: python -m pytest -q
